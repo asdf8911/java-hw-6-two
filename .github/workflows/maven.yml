@@ -1,18 +1,18 @@
-package ru.netology.statistic;
+name: Java CI with Maven
 
-public class StatisticsService {
-  /**
-   * Calculate index of max income
-   *
-   * @param incomes - array of incomes
-   * @return - index of first max value
-   */
-  public long findMax(long[] incomes) {
-    long current_max_index = 0;
-    long current_max = incomes[0];
-    for (long income : incomes)
-      if (current_max < income)
-        current_max = income;
-        return current_max;
-  }
-}
+on: [push, pull_request]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK 11
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'
+        distribution: 'adopt'
+    - name: Build with Maven
+      run: mvn -B -e verify
